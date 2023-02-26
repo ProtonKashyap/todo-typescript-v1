@@ -1,0 +1,23 @@
+.todos__single{
+    display:flex;
+    width:40%;
+    padding:25px;
+    margin-top: 15px;
+    background-color:#8fd5f7;
+    border-radius: 1rem;
+}
+.todos__single--title{
+    flex:content;
+    padding:5px;
+    font-size: 1.9em;
+    font-family: 'Poppins';
+    width: fit-content;
+}
+
+.icon{
+    margin-left: 10px;
+    font-size: 25px;
+    cursor:pointer;
+    border: 2px solid #000d9e ;
+    border-radius: 13px;
+}
