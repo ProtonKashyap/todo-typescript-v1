@@ -1,38 +1,30 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Todo } from "../model";
 import { MdOutlineEdit, MdDelete, MdDone } from "react-icons/md";
 import "./SingleTodo.css";
+import { TodosContext } from "../context/Context";
 
 type Props = {
   todo: Todo;
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 };
-export const SingleTodo = ({ todo, todos, setTodos }: Props) => {
+export const SingleTodo = ({ todo }: Props) => {
+  const { dispatch } = useContext(TodosContext);
   const [edit, setEdit] = useState<boolean>(false);
   const [editTodoTitle, setEditTodoTitle] = useState<string>(todo.title);
   //handle done functionality
   const handleDone = (id: number) => {
-    setTodos(
-      todos.map((todo: Todo) =>
-        todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
-      )
-    );
+    dispatch({ type: "done", payload: id });
   };
 
   //handle delete functionality
   const handleDelete = (id: number) => {
-    setTodos(todos.filter((todo: Todo) => todo.id !== id));
+    dispatch({ type: "delete", payload: id });
   };
 
   //handle edit functionality
   const handleEdit = (e: React.FormEvent, id: number) => {
     e.preventDefault();
-    setTodos(
-      todos.map((todo: Todo) =>
-        todo.id === id ? { ...todo, title: editTodoTitle } : todo
-      )
-    );
+    dispatch({ type: "edit", payload: { id, newTitle: editTodoTitle } });
     setEdit(false);
   };
   const inputRef = useRef<HTMLInputElement>(null);
