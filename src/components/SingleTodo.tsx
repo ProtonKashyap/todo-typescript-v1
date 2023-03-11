@@ -40,6 +40,7 @@ export const SingleTodo = ({ todo }: Props) => {
           ref={inputRef}
           className="todos__single--title"
           onChange={(e) => setEditTodoTitle(e.target.value)}
+          required
         ></input>
       ) : todo.isDone ? (
         <s className="todos__single--title">{todo.title}</s>
